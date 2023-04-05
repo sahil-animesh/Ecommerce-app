@@ -1,0 +1,9 @@
+<form [formGroup]="loginForm" class="login" (ngSubmit)="sendLoginCode()" [hidden]="!form">
+    <input type="text" placeholder="Phone No." formControlName="phoneNo">
+    <div id="recaptcha-container" [hidden]="!loginForm.controls['phoneNo'].valid"></div>
+    <button type="submit">Send OTP</button>
+</form>
+<form [formGroup]="otpForm" class="login" (ngSubmit)="verifyLoginCode()" [hidden]="form">
+    <input type="text" placeholder="OTP" formControlName="otp">
+    <button type="submit">Verify OTP</button>
+</form>

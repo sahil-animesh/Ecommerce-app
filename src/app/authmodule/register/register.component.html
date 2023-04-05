@@ -1,0 +1,34 @@
+<div style="width: 400px; height: 200px; margin-top: 200px; margin-left: 500px;" [hidden]="userRole">
+  <h1>You Joined Stunner's To</h1>
+  <button (click)="toSell('vendor')">To Sell</button>
+  <button (click)="toSell('customer')">For Shoping</button>
+</div>
+<form  [formGroup]="signupFormVendor" (ngSubmit)="onSubmit()" [hidden]="vendor">
+  <h1>Sign Up</h1>
+  <label >Phone No:</label>
+  <input type="text" formControlName="phone">
+
+  <label >First Name:</label>
+  <input  type="text" formControlName="firstName">
+
+  <label >Last Name:</label>
+  <input type="text" formControlName="lastName">
+
+  <button type="submit">Sign Up</button>
+</form>
+<form  [formGroup]="signupFormCustomer" (ngSubmit)="onSubmit()" [hidden]="customer">
+  <h1>Sign Up</h1>
+  <label>Phone No:</label>
+  <input type="text" formControlName="phone" >
+
+  <label >First Name:</label>
+  <input type="text" formControlName="firstName">
+
+  <label>Last Name:</label>
+  <input type="text" formControlName="lastName">
+
+  <label>Address:</label>
+  <input type="text" formControlName="address">
+
+  <button type="submit">Sign Up</button>
+</form>
