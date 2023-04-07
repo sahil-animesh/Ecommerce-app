@@ -3,20 +3,23 @@
   <button (click)="toSell('vendor')">To Sell</button>
   <button (click)="toSell('customer')">For Shoping</button>
 </div>
-<form  [formGroup]="signupFormVendor" (ngSubmit)="onSubmit()" [hidden]="vendor">
+<form  [formGroup]="signupFormVendor" (ngSubmit)="onSubmit('vendor')" [hidden]="vendor">
   <h1>Sign Up</h1>
   <label >Phone No:</label>
   <input type="text" formControlName="phone">
 
-  <label >First Name:</label>
-  <input  type="text" formControlName="firstName">
+  <label >Bussiness Name:</label>
+  <input  type="text" formControlName="name">
 
-  <label >Last Name:</label>
-  <input type="text" formControlName="lastName">
+  <label >GST NO.:</label>
+  <input  type="text" formControlName="gstNo">
+
+  <label >Address</label>
+  <input  type="text" formControlName="address">
 
   <button type="submit">Sign Up</button>
 </form>
-<form  [formGroup]="signupFormCustomer" (ngSubmit)="onSubmit()" [hidden]="customer">
+<form  [formGroup]="signupFormCustomer" (ngSubmit)="onSubmit('customer')" [hidden]="customer">
   <h1>Sign Up</h1>
   <label>Phone No:</label>
   <input type="text" formControlName="phone" >

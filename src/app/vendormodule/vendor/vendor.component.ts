@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { PATH } from 'src/constant';
 
 @Component({
   selector: 'app-vendor',
@@ -7,4 +9,8 @@ import { Component } from '@angular/core';
 })
 export class VendorComponent {
 
+  constructor(private router: Router) { }
+  navigateTo(route: string) {
+    this.router.navigate([`${PATH.VENDOR.VENDOR}/${route}`,]);
+  }
 }

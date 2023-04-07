@@ -1,0 +1,17 @@
+<img src="https://cdn-icons-png.flaticon.com/512/84/84380.png" height="10" width="10" (click)="activateForm()">
+<form  [formGroup]="vendorProfile" (ngSubmit)="onSubmit()">
+    <h1>Your Profile</h1>
+    <label >Phone No:</label>
+    <input type="text" formControlName="phone" >
+  
+    <label >Bussiness Name:</label>
+    <input  type="text" formControlName="name">
+  
+    <label >GST NO.:</label>
+    <input  type="text" formControlName="gstNo">
+  
+    <label >Address</label>
+    <input  type="text" formControlName="address">
+  
+    <button type="submit" [hidden]="activate">Edit</button>
+  </form>

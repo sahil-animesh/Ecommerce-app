@@ -4,15 +4,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AngularFireModule } from '@angular/fire/compat';
-import { enviroment } from 'src/enviroment';
+import { PATH } from 'src/constant';
 
 
 
 const routes: Routes = [
-  {path:"",redirectTo:"login",pathMatch:'full'},
-  {path:"login",component:LoginComponent},
-  {path:"register/:id",component:RegisterComponent}
+  {path:"",redirectTo:PATH.AUTH.LOGIN,pathMatch:'full'},
+  {path:PATH.AUTH.LOGIN,component:LoginComponent},
+  {path:PATH.AUTH.REGISTER,component:RegisterComponent}
 ];
 
 

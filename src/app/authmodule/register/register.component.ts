@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AngularFirestore } from '@angular/fire/compat/firestore/'
 import { FirestoreServiceService } from 'src/app/services/firestore-service.service';
 
 
@@ -22,31 +21,35 @@ export class RegisterComponent {
   ngOnInit() {
     this.signupFormVendor = new FormGroup({
       phone: new FormControl('', Validators.required),
-      firstName: new FormControl('', [Validators.email, Validators.required]),
-      lastName: new FormControl('', [Validators.email, Validators.required]),
-      password: new FormControl('', Validators.required),
+      name: new FormControl('', [Validators.email, Validators.required]),
+      gstNo: new FormControl('', [Validators.email, Validators.required]),
+      address: new FormControl('', Validators.required),
+      role: new FormControl('vendor', Validators.required)
     })
     this.signupFormCustomer = new FormGroup({
       phone: new FormControl('', Validators.required),
       firstName: new FormControl('', [Validators.email, Validators.required]),
       lastName: new FormControl('', [Validators.email, Validators.required]),
       address: new FormControl('', Validators.required),
-      
+      role: new FormControl('customer', Validators.required)
     })
 
     this.signupFormCustomer.controls['phone'].patchValue(this.activatedroute.snapshot.paramMap?.get('id'));
     this.signupFormVendor.controls['phone'].patchValue(this.activatedroute.snapshot.paramMap?.get('id'));
   }
-  // profilePicUpload(eventData: any) {
-  //   this.image = URL.createObjectURL(eventData.target.files[0]);
-  //   this.signupForm.controls['image'].patchValue(this.image);
 
-  //   let tag: any = document.getElementById('testImage');
-  //   tag.src = this.image;
-  // }
+  onSubmit(type:string) {
 
-  onSubmit() {
-    this.firestore.createUser(this.signupFormCustomer.value).then()
+    if(type=='vendor')
+    {
+      this.firestore.createVendor(this.signupFormVendor.value).then()
+      this.router.navigate(['vendor'])
+    }
+    else {
+
+      this.firestore.createUser(this.signupFormCustomer.value).then()
+      this.router.navigate(['customer'])
+    }
   }
 
   toSell(role:string) {

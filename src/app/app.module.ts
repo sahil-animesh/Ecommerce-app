@@ -5,9 +5,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http'
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore/'
-import { FirestoreServiceService } from './services/firestore-service.service';
 import { AngularFireModule } from '@angular/fire/compat';
 import { enviroment } from 'src/enviroment';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatDialogModule} from '@angular/material/dialog';
+
 
 
 
@@ -21,11 +23,12 @@ import { enviroment } from 'src/enviroment';
     AppRoutingModule,
     HttpClientModule,
     AngularFirestoreModule,
-    AngularFireModule.initializeApp(enviroment.firebase)
-    
+    AngularFireModule.initializeApp(enviroment.firebase),
+    BrowserAnimationsModule,
+    MatDialogModule
     
   ],
-  providers: [FirestoreServiceService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  
 })
 export class AppModule { }

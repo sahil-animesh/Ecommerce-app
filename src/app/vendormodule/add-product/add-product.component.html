@@ -1,0 +1,29 @@
+<form [formGroup]="addProduct" (ngSubmit)="onSubmit()">
+  <h1>{{title}}</h1>
+      <img src="https://icons-for-free.com/iconfiles/png/512/cloud+upload+file+storage+upload+icon-1320190558968694328.png" id="testImage" alt=""><br><br>
+    <label for="name">Product Name:</label>
+    <input type="text" formControlName="productName">
+
+    <label>Product Freshness:</label>
+    <select formControlName="productFreshness">
+      <option value="1">Brand New</option>
+      <option value="2">Second Hand</option>
+      <option value="3">Refurbished</option>
+      <option selected>Select Option</option>
+    </select>
+
+    <label >Product Price:</label>
+    <input type="number" formControlName="productPrice">
+
+    <label >Product Quantity:</label>
+    <input type="number" formControlName="productQuantity">
+
+    <label >Product Image:</label>
+    <input type="file" (change)="profilePicUpload($event)" accept=".jpg, .jpeg, .png"><br><br>
+
+    <label >Product Description:</label>
+    <input type="text" formControlName="productDescription">
+
+  <button type="submit">Add Product</button>
+</form>
+

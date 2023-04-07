@@ -1,3 +1,6 @@
+<div class="logo" >
+<img src="/assets/Stunner's-logos_black.png" width="300" height="300">
+</div>
 <form [formGroup]="loginForm" class="login" (ngSubmit)="sendLoginCode()" [hidden]="!form">
     <input type="text" placeholder="Phone No." formControlName="phoneNo">
     <div id="recaptcha-container" [hidden]="!loginForm.controls['phoneNo'].valid"></div>

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { WindowService } from 'src/app/services/windowservice.service';
 import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth"
 import { DataServiceService } from 'src/app/services/data-service.service';
+import { FirestoreServiceService } from 'src/app/services/firestore-service.service';
 
 
 
@@ -17,7 +18,7 @@ import { DataServiceService } from 'src/app/services/data-service.service';
 export class LoginComponent {
   loginForm!: FormGroup
   otpForm!: FormGroup
-  constructor(private router: Router, private win: WindowService,private dataservice:DataServiceService) {
+  constructor(private router: Router, private win: WindowService, private dataservice: DataServiceService, private firestore: FirestoreServiceService) {
     this.loginForm = new FormGroup({
       phoneNo: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]),
     })
@@ -31,7 +32,6 @@ export class LoginComponent {
 
   verificationCode!: string;
 
-  user: any;
   form = true;
 
 
@@ -63,12 +63,12 @@ export class LoginComponent {
     signInWithPhoneNumber(auth, num, appVerifier)
       .then((result: any) => {
 
-        this.form=false;
+        this.form = false;
         this.windowRef.confirmationResult = result;
 
       })
       .catch((error: any) => {
-        this.form=true;
+        this.form = true;
         console.log(error)
       });
 
@@ -79,17 +79,30 @@ export class LoginComponent {
     this.windowRef.confirmationResult
       .confirm(this.verificationCode)
       .then((result: any) => {
-        this.user = result.user;
-        this.dataservice.userId=result.user.uid;
-        console.log(this.dataservice.userId)
+
+        localStorage.setItem('token', result.user.uid);
         if (result._tokenResponse.isNewUser) {
-          
-          this.router.navigate(['auth/register',result._tokenResponse.phoneNumber]);
+
+          this.router.navigate(['auth/register', result._tokenResponse.phoneNumber]);
         }
         else {
-          this.router.navigate(['auth/register',result._tokenResponse.phoneNumber]);
+          this.firestore.getData('users').then((res) => {
+            if (res.exists()) {
+              this.router.navigate([res.data()['role']])
+            }
+            else {
+              this.firestore.getData('vendor').then((res) => {
+                if (res.exists()) {
+                  this.router.navigate([res.data()['role']])
+                }
+                else {
+
+                }
+              })
+            }
+          })
+
         }
-        localStorage.setItem('token', result.user.accessToken);
 
       })
       .catch((error: any) => console.log(error, "Incorrect code entered?"));
